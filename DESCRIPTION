@@ -1,0 +1,43 @@
+Package: queryged
+Title: Query Family Tree Tidyged Objects
+Version: 0.0.1.9000
+Authors@R: 
+    person(given = "Jamie",
+           family = "Lendrum",
+           role = c("aut", "cre"),
+           email = "jalendrum@gmail.com")
+Description: Find records in tidyged objects using assorted criteria.
+URL: https://jl5000.github.io/tidyged/,
+    https://github.com/jl5000/queryged
+License: GPL (>= 2)
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE, roclets = c("namespace", "rd", "roxytest::testthat_roclet"))
+RoxygenNote: 7.1.2
+Depends: 
+    R (>= 2.10)
+Imports: 
+    dplyr,
+    magrittr,
+    stringr,
+    purrr,
+    tibble,
+    tidyr,
+    tidyged.internals,
+    tidyged
+Suggests: 
+    testthat (>= 3.0.0),
+    roxytest,
+    rmarkdown,
+    knitr,
+    tidyged.utils,
+    tidyged.io,
+    visged
+Remotes: 
+    jl5000/tidyged.internals,
+    jl5000/tidyged.utils,
+    jl5000/tidyged.io,
+    jl5000/tidyged,
+    jl5000/visged
+Config/testthat/edition: 3
+VignetteBuilder: knitr
