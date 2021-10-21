@@ -26,7 +26,21 @@ mutate_tag_namespace <- function(gedcom){
   
 }
 
-
+#' Temporarily remove forward slashes from surnames
+#'
+#' @param gedcom A tidyged object.
+#'
+#' @return A tidyged object with all forward slashes removed from surnames.
+#' @export
+clean_indi_names <- function(gedcom) {
+  
+  gedcom %>% 
+    dplyr::mutate(value = dplyr::if_else(purrr::map_lgl(record, tidyged::is_indi, gedcom=gedcom) &
+                                           tag %in% c("NAME", "FONE", "ROMN"),
+                                         stringr::str_remove_all(value, "/"),
+                                         value))
+  
+}
 
 #' Find an xref of a record given a set of search terms
 #'
@@ -82,8 +96,8 @@ find_xref <- function(gedcom, search_patterns, mode = "strict", multiple = FALSE
   tags_ns <- toupper(names(search_patterns))
   search_patterns_val <- as.character(search_patterns) #unname
   
-  gedcom_ns <- mutate_tag_namespace(gedcom) #%>% TODO
-    #tidyged::temporarily_remove_name_slashes()
+  gedcom_ns <- mutate_tag_namespace(gedcom) %>%
+    clean_indi_names()
   reg_case <- purrr::partial(stringr::regex, ignore_case = ignore_case)
   
   matches <- purrr::map2(tags_ns, search_patterns_val,
