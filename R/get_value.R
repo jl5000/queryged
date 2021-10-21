@@ -42,17 +42,3 @@ gedcom_value <- function(gedcom, record_xref, tag, level, after_tag = NULL) {
 }
 
 
-indi_name <- function(gedcom, xref){
-  
-  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, tidyged::is_indi)
-  
-  name <- gedcom_value(gedcom, xref, "NAME", 1, "INDI") %>% 
-    stringr::str_remove_all("/")
-  
-  if(name == ""){
-    xref
-  } else {
-    name
-  }
-  
-}

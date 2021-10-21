@@ -388,3 +388,24 @@ get_ancestors <- function(gedcom,
 }
 
 
+#' Get an individual's name
+#'
+#' @param gedcom A tidyged object.
+#' @param xref An xref of an Individual record.
+#'
+#' @return The name of the individual. If one is not defined, the xref is returned.
+#' @export
+indi_name <- function(gedcom, xref){
+  
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, tidyged::is_indi)
+  
+  name <- gedcom_value(gedcom, xref, "NAME", 1, "INDI") %>% 
+    stringr::str_remove_all("/")
+  
+  if(name == ""){
+    xref
+  } else {
+    name
+  }
+  
+}

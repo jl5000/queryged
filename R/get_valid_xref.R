@@ -17,6 +17,7 @@
 #' functions.
 #'
 #' @return A valid xref identifier.
+#' @export
 get_valid_xref <- function(gedcom, xref, record_type, record_type_fn) {
   
   if (length(xref) == 0 || xref == "") {
